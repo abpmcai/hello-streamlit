@@ -1,6 +1,24 @@
 import streamlit as st
+from phi.assistant import Assistant
+from phi.tools.duckduckgo import DuckDuckGo
+from phi.llm.openai import OpenAIChat
 
-number = st.slider("Guess the number", 0, 100)
+st.title("Ai Search Assistant")
+st.caption("This app allows you to search the web using AI")
 
-if number == 25:
-  st.write("Good Job!")
+openai_access_token = st.text_input("OpenAI API Key", type="password")
+
+if openai_access_token:
+  assistant = Assistant()
+  llm=OpenAIChat(
+    model="gpt-4o"
+    max_tokens=1024,
+    temperature=0.9,
+    api_key=openai_acess_token, tools=[DuckDuckGo()], show_tool_calls = True
+  )
+
+  query = st.text_input("Enter the Search Query", type="default")
+
+  if query:
+    response = assistant.run(query, stream=False)
+    st.write(response)
