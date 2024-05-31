@@ -1,10 +1,6 @@
 import streamlit as st
-import mymodel as m
 
-st.write("""
-# Sales model
-Below are our sales predictions
-for this customer.
-""")
+number = st.slider("Pick a number", 0, 100)
 
-st.write(m.run(window=15))
+if number == 25:
+  st.write("Good Job!")
