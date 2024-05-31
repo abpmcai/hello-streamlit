@@ -11,7 +11,7 @@ openai_access_token = st.text_input("OpenAI API Key", type="password")
 if openai_access_token:
   assistant = Assistant()
   llm=OpenAIChat(
-    model="gpt-4o"
+    model="gpt-4o",
     max_tokens=1024,
     temperature=0.9,
     api_key=openai_acess_token, tools=[DuckDuckGo()], show_tool_calls = True
